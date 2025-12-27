@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mariya Birthday Surprise</title>
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(circle at top,#ffd6e8,#0f001a);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+.screen{
+  text-align:center;
+  padding:20px;
+  max-width:95%;
+  animation:fadeIn 1.5s ease;
+}
+
+h1{
+  font-size:32px;
+  color:#ff8fcf;
+  animation:glow 3s infinite alternate;
+}
+
+button{
+  margin-top:35px;
+  padding:14px 32px;
+  font-size:16px;
+  background:transparent;
+  color:#ffb6da;
+  border:2px solid #ff8fcf;
+  border-radius:40px;
+  animation:pulse 2.5s infinite;
+  cursor:pointer;
+}
+
+.hidden{
+  display:none;
+}
+
+/* Cake */
+.cake{
+  width:130px;
+  height:110px;
+  margin:40px auto 0;
+  position:relative;
+  animation:float 3s infinite;
+}
+
+.cake .base{
+  width:100%;
+  height:70px;
+  background:#ffb6da;
+  border-radius:15px;
+  position:absolute;
+  bottom:0;
+}
+
+.cake .cream{
+  width:100%;
+  height:25px;
+  background:#fff;
+  border-radius:15px 15px 0 0;
+}
+
+.candle{
+  width:8px;
+  height:28px;
+  background:#ffd36a;
+  position:absolute;
+  top:-28px;
+  border-radius:4px;
+}
+
+.candle::after{
+  content:"";
+  width:6px;
+  height:6px;
+  background:#ff6b6b;
+  border-radius:50%;
+  position:absolute;
+  top:-6px;
+  left:1px;
+}
+
+/* Text */
+.romantic{
+  margin-top:35px;
+  font-size:18px;
+  line-height:1.8;
+  color:#ffd6ea;
+  animation:textUp 1.5s ease;
+}
+
+/* Hearts */
+.heart{
+  position:absolute;
+  width:10px;
+  height:10px;
+  background:#ff8fcf;
+  transform:rotate(45deg);
+  animation:rise 8s linear infinite;
+}
+
+.heart::before,
+.heart::after{
+  content:"";
+  width:10px;
+  height:10px;
+  background:#ff8fcf;
+  border-radius:50%;
+  position:absolute;
+}
+
+.heart::before{top:-5px;left:0}
+.heart::after{left:-5px;top:0}
+
+/* Animations */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes glow{from{text-shadow:0 0 10px #ff8fcf}to{text-shadow:0 0 25px #ffb6da}}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)}}
+@keyframes textUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes rise{from{bottom:-20px;opacity:.7}to{bottom:110%;opacity:0}}
+</style>
+</head>
+
+<body>
+
+<!-- Screen 1 -->
+<div id="one" class="screen">
+  <h1>Happy Birthday Mariya</h1>
+  <button id="btnOne">Touch gently</button>
+</div>
+
+<!-- Screen 2 -->
+<div id="two" class="screen hidden">
+  <h1>Make a wish</h1>
+
+  <div class="cake" id="cakeBtn">
+    <div class="cream"></div>
+    <div class="base"></div>
+
+    <div class="candle" style="left:35px"></div>
+    <div class="candle" style="left:60px"></div>
+    <div class="candle" style="left:85px"></div>
+  </div>
+</div>
+
+<!-- Screen 3 -->
+<div id="three" class="screen hidden">
+  <div class="cake">
+    <div class="cream"></div>
+    <div class="base"></div>
+  </div>
+
+  <div class="romantic">
+    Mariya.......<br><br>
+
+    ajker ei raat ta shudhu tomar.......<br>
+    kintu ei raat amar jiboner shobcheye shundor golpo.......<br><br>
+
+    tumi jokhon haso.......<br>
+    amar shob koshto nijer theke chole jay.......<br><br>
+
+    tumi jokhon chup thako.......<br>
+    tokhon o ami tomake shobcheye beshi feel kori.......<br><br>
+
+    ei jonmodine ami kono wada dite chai na.......<br>
+    ami shudhu chai protidin tomake nijer moto kore vlobashte.......<br><br>
+
+    tumi amar shanti.......<br>
+    tumi amar golpo.......<br>
+    tumi amar shob kichu.......<br><br>
+
+    ami tomake vlobashi.......<br>
+    aaj.......<br>
+    agami.......<br>
+    shob shomoy.......
+  </div>
+</div>
+
+<script>
+const screenOne = document.getElementById("one");
+const screenTwo = document.getElementById("two");
+const screenThree = document.getElementById("three");
+
+document.getElementById("btnOne").addEventListener("click", () => {
+  screenOne.classList.add("hidden");
+  screenTwo.classList.remove("hidden");
+});
+
+document.getElementById("cakeBtn").addEventListener("click", () => {
+  screenTwo.classList.add("hidden");
+  screenThree.classList.remove("hidden");
+});
+
+function createHeart(){
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.style.left = Math.random()*100 + "vw";
+  h.style.animationDuration = (6 + Math.random()*4) + "s";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 9000);
+}
+
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
